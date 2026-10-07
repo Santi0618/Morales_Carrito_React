@@ -1,0 +1,63 @@
+:root {
+  --ink: #1f2a24; --leaf: #2f6b3a; --leaf-dark: #214c29; --panela: #d9922e;
+  --bg: #f1f4ec; --card: #fff; --line: #d8dfd0; --danger: #b3382c;
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif; color: var(--ink);
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); }
+button { font: inherit; cursor: pointer; }
+:focus-visible { outline: 3px solid var(--panela); outline-offset: 2px; }
+
+.navbar { position: fixed; inset: 0 0 auto 0; height: 60px; z-index: 20; display: flex; align-items: center;
+  justify-content: space-between; padding: 0 20px; background: var(--leaf-dark); color: #fff; }
+.brand { margin: 0; font-size: 1.35rem; letter-spacing: .5px; }
+.cart-btn { position: relative; background: none; border: 0; color: #fff; padding: 6px; }
+.badge { position: absolute; top: -4px; right: -6px; min-width: 20px; height: 20px; padding: 0 5px; border-radius: 10px;
+  background: var(--panela); color: var(--ink); font-size: .75rem; font-weight: 700; display: grid; place-items: center; }
+
+.catalog { padding: 84px 20px 40px; max-width: 1000px; margin: 0 auto; display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; padding: 18px; }
+.card h2 { margin: 0 0 6px; font-size: 1.1rem; }
+.price { margin: 0; font-size: 1.4rem; font-weight: 700; color: var(--leaf); }
+.stock { margin: 4px 0 14px; color: #5b6a5f; font-size: .9rem; }
+.card-actions { display: flex; gap: 10px; }
+.qty-input { width: 72px; padding: 8px; border: 1px solid #aab5a3; border-radius: 6px; font: inherit; text-align: center;
+  appearance: textfield; -moz-appearance: textfield; }
+.qty-input::-webkit-outer-spin-button, .qty-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.btn-add { flex: 1; border: 0; border-radius: 6px; background: var(--leaf); color: #fff; font-weight: 700; }
+.btn-add:hover:not(:disabled) { background: var(--leaf-dark); }
+.btn-add:disabled { background: #b9c2b4; cursor: not-allowed; }
+
+.overlay { position: fixed; inset: 0; background: rgba(0,0,0,.4); z-index: 30; }
+.cart { position: fixed; top: 0; right: 0; bottom: 0; width: min(400px, 100%); z-index: 40; background: #fff;
+  display: flex; flex-direction: column; transform: translateX(100%); visibility: hidden;
+  transition: transform .25s, visibility .25s; }
+.cart.open { transform: none; visibility: visible; }
+.cart-head { display: flex; justify-content: space-between; align-items: center; padding: 16px 20px; border-bottom: 1px solid var(--line); }
+.cart-head h2 { margin: 0; }
+.icon-btn { background: none; border: 0; font-size: 1.5rem; line-height: 1; padding: 4px 8px; }
+.icon-btn.danger { font-size: 1.1rem; color: var(--danger); }
+.cart-body { flex: 1; overflow-y: auto; padding: 8px 20px; }
+.empty { color: #5b6a5f; }
+.line { padding: 14px 0; border-bottom: 1px solid var(--line); }
+.line-top, .line-bottom { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.line-bottom { margin-top: 10px; }
+.stepper { display: flex; gap: 4px; }
+.stepper button { width: 34px; border: 1px solid #aab5a3; border-radius: 6px; background: #fff; font-size: 1.1rem; }
+.stepper .qty-input { width: 56px; }
+.subtotal { display: flex; flex-direction: column; align-items: flex-end; font-weight: 700; }
+.subtotal small { font-weight: 400; color: #5b6a5f; }
+.cart-foot { padding: 16px 20px; border-top: 2px solid var(--leaf); background: var(--bg); }
+.cart-foot p { display: flex; justify-content: space-between; margin: 4px 0; }
+.cart-foot .total { font-size: 1.25rem; color: var(--leaf-dark); }
+
+.toasts { position: fixed; bottom: 16px; left: 50%; transform: translateX(-50%); z-index: 50; width: min(440px, calc(100% - 24px));
+  display: flex; flex-direction: column; gap: 8px; }
+.toast { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 8px; background: var(--ink); color: #fff;
+  border-left: 5px solid var(--panela); animation: entra .2s ease-out; }
+.toast span { flex: 1; }
+.toast-action { border: 0; border-radius: 6px; padding: 6px 12px; background: var(--panela); color: var(--ink); font-weight: 700; }
+.toast-x { background: none; border: 0; color: #fff; font-size: 1.3rem; line-height: 1; }
+@keyframes entra { from { opacity: 0; transform: translateY(8px); } }
+@media (prefers-reduced-motion: reduce) { .toast, .cart { animation: none; transition: none; } }
